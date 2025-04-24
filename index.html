@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tools in One</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header id="main-header" class="app-header">
+             <div class="header-top-row">
+                 <div class="logo-area">
+                     <!-- You can replace span with an <img> tag for a logo -->
+                     <span class="logo-placeholder">AT</span>
+                     <h1 id="app-title">All Tools</h1>
+                 </div>
+                 <div class="header-actions">
+                    <button id="theme-toggle" aria-label="Toggle Dark Mode" title="Toggle Theme">
+                        <!-- Theme icon will be updated by JS if needed, start with brightness -->
+                        <img src="assets/icons/brightness.png" alt="Toggle Theme" id="theme-icon">
+                    </button>
+                 </div>
+            </div>
+            <div class="welcome-area">
+                <p>Your everyday utility toolkit</p>
+            </div>
+            <div class="search-area">
+                <input type="search" id="search-bar" placeholder="Search tools..." aria-label="Search tools">
+                <img src="assets/icons/search.png" class="search-icon-inside" alt="">
+            </div>
+        </header>
+
+        <!-- Tool Grid -->
+        <main id="tool-grid" class="tool-grid">
+             <div class="tool-card" data-tool="calculator" tabindex="0"> <img src="assets/icons/calculator.png" alt=""> <h3>Calculator</h3> </div>
+             <div class="tool-card" data-tool="unit-converter" tabindex="0"> <img src="assets/icons/unit-converter.png" alt=""> <h3>Unit Conv</h3> </div>
+             <div class="tool-card" data-tool="currency-converter" tabindex="0"> <img src="assets/icons/currency-converter.png" alt=""> <h3>Currency</h3> </div>
+             <div class="tool-card" data-tool="age-calculator" tabindex="0"> <img src="assets/icons/age-calculator.png" alt=""> <h3>Age Calc</h3> </div>
+             <div class="tool-card" data-tool="bmi-calculator" tabindex="0"> <img src="assets/icons/bmi-calculator.png" alt=""> <h3>BMI Calc</h3> </div>
+             <div class="tool-card" data-tool="qr-generator" tabindex="0"> <img src="assets/icons/qr-code.png" alt=""> <h3>QR Gen</h3> </div>
+             <div class="tool-card" data-tool="text-tools" tabindex="0"> <img src="assets/icons/text-tools.png" alt=""> <h3>Text Tools</h3> </div>
+             <div class="tool-card" data-tool="password-generator" tabindex="0"> <img src="assets/icons/password-generator.png" alt=""> <h3>Pass Gen</h3> </div>
+             <div class="tool-card" data-tool="color-picker" tabindex="0"> <img src="assets/icons/color-picker.png" alt=""> <h3>Color Picker</h3> </div>
+             <div class="tool-card" data-tool="notepad" tabindex="0"> <img src="assets/icons/notepad.png" alt=""> <h3>Notepad</h3> </div>
+        </main>
+
+        <!-- Tool Sections Wrapper -->
+        <div id="tool-sections-wrapper">
+
+            <!-- Calculator Section -->
+            <section id="calculator" class="tool-section">
+                <button class="back-button" aria-label="Go back to tool grid"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button>
+                <button id="show-history-btn" class="history-button" aria-label="Show calculator history">
+                    <img src="assets/icons/history.png" alt="History" class="history-icon">
+                </button>
+                <h2>Calculator</h2>
+                <div class="calculator-container">
+                    <div class="calc-display-area"> <span id="calc-operation-preview" class="operation-preview"></span> <input type="text" id="calc-display" class="main-display" value="0" disabled aria-label="Calculator display"> </div>
+                    <div class="calc-buttons modern"> <button class="fn-button modern" onclick="calcClear()" aria-label="Clear All">AC</button> <button class="fn-button modern" onclick="calcDelete()" aria-label="Delete last entry">DEL</button> <button class="op-button modern" onclick="chooseOperator('/')" aria-label="Divide">÷</button> <button class="op-button modern" onclick="chooseOperator('*')" aria-label="Multiply">×</button> <button class="num-button modern" onclick="calcAppend('7')">7</button> <button class="num-button modern" onclick="calcAppend('8')">8</button> <button class="num-button modern" onclick="calcAppend('9')">9</button> <button class="op-button modern" onclick="chooseOperator('-')" aria-label="Subtract">−</button> <button class="num-button modern" onclick="calcAppend('4')">4</button> <button class="num-button modern" onclick="calcAppend('5')">5</button> <button class="num-button modern" onclick="calcAppend('6')">6</button> <button class="op-button modern" onclick="chooseOperator('+')" aria-label="Add">+</button> <button class="num-button modern" onclick="calcAppend('1')">1</button> <button class="num-button modern" onclick="calcAppend('2')">2</button> <button class="num-button modern" onclick="calcAppend('3')">3</button> <button class="eq-button modern" onclick="calcEquals()" aria-label="Equals">=</button> <button class="num-button modern zero-button" onclick="calcAppend('0')">0</button> <button class="num-button modern" onclick="calcAppend('.')">.</button> </div>
+                </div>
+            </section>
+            <!-- Calculator History Page -->
+            <section id="calculator-history-page" class="tool-section history-page">
+                 <button class="back-button history-back-button" aria-label="Back to Calculator"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button>
+                 <h2>Calculation History</h2>
+                 <div class="history-content-area"> <ul id="full-history-list"><li>No history yet.</li></ul> <button id="clear-history-btn" class="secondary-button clear-history">Clear History</button> </div>
+            </section>
+
+            <!-- Other Tool Sections -->
+             <section id="unit-converter" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>Unit Converter</h2> <div class="tool-content-area"> <div class="converter-group"><label for="unit-category">Category:</label><select id="unit-category"><option value="length">Length</option><option value="weight">Weight</option><option value="temperature">Temperature</option></select></div> <div class="converter-row"><div class="input-group"><label for="unit-input">From:</label><input type="number" id="unit-input" placeholder="Enter value"><select id="unit-from" aria-label="Convert from unit"></select></div><span class="converter-arrow">⇄</span><div class="input-group"><label for="unit-output">To:</label><input type="text" id="unit-output" placeholder="Result" readonly aria-label="Conversion result"><select id="unit-to" aria-label="Convert to unit"></select></div></div> <p class="result-output" id="unit-result-display">Result: -</p> </div> </section>
+             <section id="currency-converter" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>Currency Converter</h2> <div class="tool-content-area"> <div class="converter-row"><div class="input-group"><label for="currency-amount">Amount:</label><input type="number" id="currency-amount" placeholder="Amount" value="1"></div><div class="input-group"><label for="currency-from">From:</label><select id="currency-from" aria-label="Convert from currency"></select></div><span class="converter-arrow">⇄</span><div class="input-group"><label for="currency-to">To:</label><select id="currency-to" aria-label="Convert to currency"></select></div></div> <div class="result-area"><p class="conversion-rate-display" id="conversion-rate-display" aria-live="polite">Fetching rate...</p><p class="result-output">Converted: <strong id="currency-result">-</strong></p><p class="api-status" id="currency-api-status"></p></div> </div> </section>
+             <section id="age-calculator" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>Age Calculator</h2> <div class="tool-content-area"> <div class="input-group-column"><label for="birth-date">Enter Date of Birth:</label><input type="date" id="birth-date" aria-label="Date of Birth" max=""></div> <button id="calculate-age-btn" class="primary-button">Calculate Age</button> <p id="age-result" class="result-output">Your age will appear here</p> </div> </section>
+             <section id="bmi-calculator" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>BMI Calculator</h2> <div class="tool-content-area"> <div class="input-row"> <div class="input-group"><label for="bmi-height">Height (cm):</label><input type="number" id="bmi-height" placeholder="e.g., 175"></div> <div class="input-group"><label for="bmi-weight">Weight (kg):</label><input type="number" id="bmi-weight" placeholder="e.g., 70"></div> </div> <button id="calculate-bmi-btn" class="primary-button">Calculate BMI</button> <p id="bmi-result" class="result-output">Your BMI will appear here</p> </div> </section>
+             <section id="qr-generator" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>QR Code Generator</h2> <div class="tool-content-area"> <div class="input-group-column"><label for="qr-text">Text or URL:</label><input type="text" id="qr-text" placeholder="Enter text to encode" aria-label="Text or URL for QR code"></div> <button id="generate-qr-btn" class="primary-button">Generate QR Code</button> <div id="qr-code-result" class="qr-code-container" aria-live="polite"><p>Enter text and click Generate.</p></div> </div> </section>
+             <section id="text-tools" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>Text Tools</h2> <div class="tool-content-area"> <div class="input-group-column"><label for="text-input">Your Text:</label><textarea id="text-input" rows="6" placeholder="Enter your text here..." aria-label="Text input area"></textarea></div> <div class="text-tool-buttons"><button id="text-uppercase">Uppercase</button><button id="text-lowercase">Lowercase</button><button id="text-titlecase">Title Case</button><button id="text-remove-spaces">Clean Spaces</button></div> <p id="text-stats" class="stats-output">Words: 0 | Chars: 0 | Lines: 1</p> </div> </section>
+             <section id="password-generator" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>Password Generator</h2> <div class="tool-content-area"> <div class="input-group"> <label for="pass-length-slider" class="slider-label">Password Length: <span id="pass-length-value" class="slider-value">12</span></label> <input type="range" id="pass-length-slider" class="styled-slider" min="6" max="32" value="12" aria-labelledby="pass-length-value"> </div> <fieldset class="pass-options modern"> <legend>Include Characters:</legend> <div class="option-item"> <input type="checkbox" id="pass-opt-uppercase" class="styled-checkbox" checked> <label for="pass-opt-uppercase">Uppercase (A-Z)</label> </div> <div class="option-item"> <input type="checkbox" id="pass-opt-lowercase" class="styled-checkbox" checked> <label for="pass-opt-lowercase">Lowercase (a-z)</label> </div> <div class="option-item"> <input type="checkbox" id="pass-opt-numbers" class="styled-checkbox" checked> <label for="pass-opt-numbers">Numbers (0-9)</label> </div> <div class="option-item"> <input type="checkbox" id="pass-opt-symbols" class="styled-checkbox" checked> <label for="pass-opt-symbols">Symbols (!@#$)</label> </div> </fieldset> <button id="generate-pass-btn" class="primary-button generate-button"> <img src="assets/icons/password-generator.png" alt="" class="button-icon"> Generate Password </button> <div class="output-group password-output-area"> <label for="password-output">Generated Password:</label> <div class="output-field-container"> <input type="text" id="password-output" readonly placeholder="Your password here" aria-label="Generated Password"> <button id="copy-password-btn" class="copy-button" aria-label="Copy password" title="Copy Password"> <img src="assets/icons/copy.png" alt="Copy" id="copy-icon"> </button> </div> </div> <p id="pass-strength" class="result-output password-strength">Strength: <span id="pass-strength-text" class="medium">Medium</span></p> </div> </section>
+             <section id="color-picker" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>Color Picker & Converter</h2> <div class="tool-content-area"> <div class="color-picker-area"><div class="input-group picker-input-group"><label for="color-picker-input">Pick Color:</label><input type="color" id="color-picker-input" value="#ffffff" aria-label="Color Picker Input"></div><div class="color-values"><div class="input-group"><label for="color-hex">HEX:</label><input type="text" id="color-hex" value="#ffffff" aria-label="Hexadecimal color value"></div><div class="input-group"><label for="color-rgb">RGB:</label><input type="text" id="color-rgb" value="rgb(255, 255, 255)" aria-label="RGB color value"></div></div></div> <label class="preview-label">Color Preview:</label><div id="color-preview" class="color-preview" aria-label="Selected color preview"></div> </div> </section>
+             <section id="notepad" class="tool-section"> <button class="back-button" aria-label="Go back"><img src="assets/icons/back-arrow.png" alt="" class="back-arrow-icon"> Back</button> <h2>Quick Notes</h2> <div class="tool-content-area"> <div class="input-group-column"><label for="notepad-area">Your Notes (auto-saved locally):</label><textarea id="notepad-area" rows="10" placeholder="Write your notes here..." aria-label="Notepad text area"></textarea></div> <div class="notepad-controls"><button id="notepad-clear" class="secondary-button">Clear Notes</button><button id="notepad-download" class="secondary-button">Download Notes</button><p id="notepad-status" class="notepad-status" aria-live="polite"></p></div> </div> </section>
+
+        </div> <!-- End #tool-sections-wrapper -->
+    </div><!-- /.container -->
+    <script src="js/main.js"></script>
+</body>
+</html>
